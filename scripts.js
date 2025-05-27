@@ -359,14 +359,33 @@ const elements = {
 
 // Initialize the application
 function init() {
+    console.log('Initializing training app...');
     cacheElements();
     showDashboard();
     setupEventListeners();
     
-    // Add smooth scrolling for hero CTA
+    // Ensure hero button is working
+    setupHeroCTA();
+}
+
+// Setup hero call-to-action button
+function setupHeroCTA() {
     const heroButton = document.querySelector('.hero-cta');
     if (heroButton) {
-        heroButton.addEventListener('click', scrollToTraining);
+        console.log('Hero CTA button found, attaching event listener');
+        // Remove any existing onclick to avoid conflicts
+        heroButton.removeAttribute('onclick');
+        
+        // Add event listener
+        heroButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log('Hero CTA clicked');
+            scrollToTraining();
+        });
+    } else {
+        console.log('Hero CTA button not found');
+        // Try again after DOM is fully loaded
+        setTimeout(setupHeroCTA, 100);
     }
 }
 
@@ -605,9 +624,37 @@ function backToDashboard() {
 
 // Scroll to training section from hero
 function scrollToTraining() {
-    const trainingSection = document.querySelector('.section-header');
-    if (trainingSection) {
-        trainingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Try multiple selectors to find the training section
+    const selectors = [
+        '.main-content',
+        '.section-header', 
+        '.training-grid',
+        '#dashboard'
+    ];
+    
+    let targetElement = null;
+    
+    for (const selector of selectors) {
+        targetElement = document.querySelector(selector);
+        if (targetElement) {
+            break;
+        }
+    }
+    
+    if (targetElement) {
+        // Add a small offset to account for any fixed headers
+        const offsetTop = targetElement.offsetTop - 20;
+        
+        window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+        });
+    } else {
+        // Fallback: scroll to a reasonable position
+        window.scrollTo({
+            top: window.innerHeight,
+            behavior: 'smooth'
+        });
     }
 }
 
@@ -763,3 +810,15 @@ window.TrainingApp = {
     closeModal,
     scrollToTraining
 };
+
+// Make key functions globally available for inline onclick handlers
+window.scrollToTraining = scrollToTraining;
+window.startTask = startTask;
+window.nextStep = nextStep;
+window.previousStep = previousStep;
+window.completeTask = completeTask;
+window.backToDashboard = backToDashboard;
+window.showLicenseInfo = showLicenseInfo;
+window.showContributeInfo = showContributeInfo;
+window.showAbout = showAbout;
+window.closeModal = closeModal;
