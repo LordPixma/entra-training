@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Entra Administrator Training</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #0078d4, #106ebe);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .dashboard {
+            display: block;
+        }
+
+        .task-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .category-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            border-left: 5px solid #0078d4;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .category-card h3 {
+            color: #0078d4;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .task-button {
+            display: block;
+            width: 100%;
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+            font-size: 1rem;
+            color: #495057;
+        }
+
+        .task-button:hover {
+            border-color: #0078d4;
+            background: #f0f8ff;
+            transform: translateX(5px);
+        }
+
+        .task-button:last-child {
+            margin-bottom: 0;
+        }
+
+        .wizard {
+            display: none;
+        }
+
+        .wizard-header {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .wizard-title {
+            font-size: 1.8rem;
+            color: #0078d4;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #0078d4, #106ebe);
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .step-counter {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .step-content {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .step-instruction {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #495057;
+        }
+
+        .step-details {
+            background: #f0f8ff;
+            border-left: 4px solid #0078d4;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .step-image {
+            width: 100%;
+            max-width: 600px;
+            height: 200px;
+            background: linear-gradient(45deg, #f1f3f4, #e8eaed);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: #5f6368;
+            font-style: italic;
+        }
+
+        .step-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #0078d4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #106ebe;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #545b62;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #0078d4;
+            color: #0078d4;
+        }
+
+        .btn-outline:hover {
+            background: #0078d4;
+            color: white;
+        }
+
+        .completion-message {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .completion-message h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .task-categories {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .step-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Microsoft Entra Administrator Training</h1>
+            <p>Interactive step-by-step guides for common administrative tasks</p>
+        </div>
+
+        <div class="main-content">
+            <!-- Dashboard -->
+            <div id="dashboard" class="dashboard">
+                <div class="task-categories">
+                    <div class="category-card">
+                        <h3>👥 User Account Management</h3>
+                        <button class="task-button" onclick="startTask('create-user')">
+                            Create New User Account
+                        </button>
+                        <button class="task-button" onclick="startTask('create-guest-user')">
+                            Create Guest User Account
+                        </button>
+                        <button class="task-button" onclick="startTask('update-user-profile')">
+                            Update User Profile & Properties
+                        </button>
+                        <button class="task-button" onclick="startTask('delete-user')">
+                            Delete User Account
+                        </button>
+                        <button class="task-button" onclick="startTask('restore-deleted-user')">
+                            Restore Deleted User
+                        </button>
+                        <button class="task-button" onclick="startTask('block-user-signin')">
+                            Block/Unblock User Sign-in
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>🔑 Password Management</h3>
+                        <button class="task-button" onclick="startTask('reset-user-password')">
+                            Reset User Password
+                        </button>
+                        <button class="task-button" onclick="startTask('change-user-password')">
+                            Change User Password
+                        </button>
+                        <button class="task-button" onclick="startTask('reset-admin-password')">
+                            Reset Administrator Password
+                        </button>
+                        <button class="task-button" onclick="startTask('unlock-user-account')">
+                            Unlock User Account
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>📋 License Management</h3>
+                        <button class="task-button" onclick="startTask('assign-license')">
+                            Assign User License
+                        </button>
+                        <button class="task-button" onclick="startTask('revoke-license')">
+                            Revoke User License
+                        </button>
+                        <button class="task-button" onclick="startTask('bulk-license-assignment')">
+                            Bulk License Assignment
+                        </button>
+                        <button class="task-button" onclick="startTask('view-license-usage')">
+                            View License Usage Reports
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>👪 Group Management</h3>
+                        <button class="task-button" onclick="startTask('create-security-group')">
+                            Create Security Group
+                        </button>
+                        <button class="task-button" onclick="startTask('create-m365-group')">
+                            Create Microsoft 365 Group
+                        </button>
+                        <button class="task-button" onclick="startTask('manage-group-members')">
+                            Add/Remove Group Members
+                        </button>
+                        <button class="task-button" onclick="startTask('configure-dynamic-membership')">
+                            Configure Dynamic Membership Rules
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>🔐 Authentication & Security</h3>
+                        <button class="task-button" onclick="startTask('configure-mfa')">
+                            Configure Multi-Factor Authentication
+                        </button>
+                        <button class="task-button" onclick="startTask('manage-auth-methods')">
+                            Manage User Authentication Methods
+                        </button>
+                        <button class="task-button" onclick="startTask('configure-signin-policies')">
+                            Configure User Sign-in Policies
+                        </button>
+                        <button class="task-button" onclick="startTask('block-legacy-auth')">
+                            Block Legacy Authentication
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>🌐 B2B Guest Management</h3>
+                        <button class="task-button" onclick="startTask('invite-guest-user')">
+                            Invite B2B Guest User
+                        </button>
+                        <button class="task-button" onclick="startTask('manage-guest-permissions')">
+                            Set Guest User Permissions
+                        </button>
+                        <button class="task-button" onclick="startTask('remove-guest-user')">
+                            Remove Guest User Account
+                        </button>
+                        <button class="task-button" onclick="startTask('bulk-guest-invitation')">
+                            Bulk Guest User Invitation
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>⚙️ Directory Settings</h3>
+                        <button class="task-button" onclick="startTask('configure-app-registration')">
+                            Configure App Registration Settings
+                        </button>
+                        <button class="task-button" onclick="startTask('manage-profile-editing')">
+                            Manage Profile Editing Permissions
+                        </button>
+                        <button class="task-button" onclick="startTask('configure-admin-units')">
+                            Create Administrative Units
+                        </button>
+                        <button class="task-button" onclick="startTask('assign-admin-roles')">
+                            Assign Administrative Roles
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>📊 Monitoring & Reports</h3>
+                        <button class="task-button" onclick="startTask('view-audit-logs')">
+                            View Audit Logs
+                        </button>
+                        <button class="task-button" onclick="startTask('review-signin-reports')">
+                            Review Sign-in Reports
+                        </button>
+                        <button class="task-button" onclick="startTask('monitor-service-health')">
+                            Monitor Service Health
+                        </button>
+                        <button class="task-button" onclick="startTask('create-support-ticket')">
+                            Create Support Ticket
+                        </button>
+                    </div>
+
+                    <div class="category-card">
+                        <h3>📱 Device Management</h3>
+                        <button class="task-button" onclick="startTask('manage-device-registration')">
+                            Manage Device Registration
+                        </button>
+                        <button class="task-button" onclick="startTask('configure-device-compliance')">
+                            Configure Device Compliance
+                        </button>
+                        <button class="task-button" onclick="startTask('view-device-reports')">
+                            View Device Reports
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Wizard -->
+            <div id="wizard" class="wizard">
+                <div class="wizard-header">
+                    <h2 id="wizard-title" class="wizard-title"></h2>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                    </div>
+                    <div id="step-counter" class="step-counter">Step 1 of 5</div>
+                </div>
+
+                <div id="step-content" class="step-content">
+                    <div id="step-instruction" class="step-instruction"></div>
+                    <div id="step-details" class="step-details"></div>
+                    <div id="step-image" class="step-image"></div>
+                </div>
+
+                <div class="step-actions">
+                    <button id="prev-btn" class="btn btn-secondary" onclick="previousStep()">Previous</button>
+                    <button id="next-btn" class="btn btn-primary" onclick="nextStep()">Next Step</button>
+                    <button id="complete-btn" class="btn btn-primary hidden" onclick="completeTask()">Complete Task</button>
+                    <button id="back-dashboard" class="btn btn-outline" onclick="backToDashboard()">Back to Dashboard</button>
+                </div>
+
+                <div id="completion-message" class="completion-message hidden">
+                    <h2>🎉 Task Completed!</h2>
+                    <p>Great job! You've successfully completed this administrative task.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Task definitions
+        const tasks = {
+            'create-user': {
+                title: 'Create New User Account',
+                steps: [
+                    {
+                        instruction: 'Navigate to the Microsoft Entra admin center',
+                        details: 'Open your web browser and go to entra.microsoft.com. Sign in with your administrator credentials.',
+                        image: 'Screenshot: Entra admin center login page'
+                    },
+                    {
+                        instruction: 'Access the Users section',
+                        details: 'In the left navigation panel, click on "Identity" then select "Users" to view the user management interface.',
+                        image: 'Screenshot: Navigation to Users section'
+                    },
+                    {
+                        instruction: 'Click "New user" button',
+                        details: 'At the top of the Users page, click the "New user" button to start creating a new user account.',
+                        image: 'Screenshot: New user button highlighted'
+                    },
+                    {
+                        instruction: 'Fill in user details',
+                        details: 'Enter the required information: Display name, User principal name, and initial password. Choose whether to auto-generate or create a custom password.',
+                        image: 'Screenshot: User creation form'
+                    },
+                    {
+                        instruction: 'Review and create the user',
+                        details: 'Review all the information entered, then click "Create" to finalize the new user account. The user will receive welcome instructions via email.',
+                        image: 'Screenshot: User creation confirmation'
+                    }
+                ]
+            },
+            'create-guest-user': {
+                title: 'Create Guest User Account',
+                steps: [
+                    {
+                        instruction: 'Navigate to Users section',
+                        details: 'In the Entra admin center, go to Identity > Users to access user management.',
+                        image: 'Screenshot: Users section navigation'
+                    },
+                    {
+                        instruction: 'Select "New guest user"',
+                        details: 'Click the "New user" dropdown and select "Invite external user" to create a guest account.',
+                        image: 'Screenshot: New guest user option'
+                    },
+                    {
+                        instruction: 'Enter guest user details',
+                        details: 'Fill in the external user\'s email address, display name, and personal message for the invitation.',
+                        image: 'Screenshot: Guest user invitation form'
+                    },
+                    {
+                        instruction: 'Configure guest permissions',
+                        details: 'Set the appropriate guest user permissions and assign to groups if needed.',
+                        image: 'Screenshot: Guest permissions configuration'
+                    },
+                    {
+                        instruction: 'Send invitation',
+                        details: 'Review the invitation details and click "Invite" to send the guest user invitation email.',
+                        image: 'Screenshot: Send guest invitation'
+                    }
+                ]
+            },
+            'update-user-profile': {
+                title: 'Update User Profile & Properties',
+                steps: [
+                    {
+                        instruction: 'Locate the user account',
+                        details: 'Navigate to Identity > Users and search for the user whose profile needs updating.',
+                        image: 'Screenshot: User search interface'
+                    },
+                    {
+                        instruction: 'Access user profile',
+                        details: 'Click on the user\'s name to open their detailed profile page.',
+                        image: 'Screenshot: User profile page'
+                    },
+                    {
+                        instruction: 'Edit profile information',
+                        details: 'Click "Edit" and update the necessary fields such as display name, job title, department, contact information.',
+                        image: 'Screenshot: Edit user profile form'
+                    },
+                    {
+                        instruction: 'Configure additional properties',
+                        details: 'Update extended properties like manager, employee ID, cost center, and custom attributes as needed.',
+                        image: 'Screenshot: Additional user properties'
+                    },
+                    {
+                        instruction: 'Save changes',
+                        details: 'Review all changes and click "Save" to update the user profile. Changes will be reflected immediately.',
+                        image: 'Screenshot: Save profile changes'
+                    }
+                ]
+            },
+            'delete-user': {
+                title: 'Delete User Account',
+                steps: [
+                    {
+                        instruction: 'Navigate to the user account',
+                        details: 'Go to Identity > Users and locate the user account that needs to be deleted.',
+                        image: 'Screenshot: User list with target user'
+                    },
+                    {
+                        instruction: 'Select the user',
+                        details: 'Click the checkbox next to the user\'s name or click on the user to open their profile.',
+                        image: 'Screenshot: Select user for deletion'
+                    },
+                    {
+                        instruction: 'Initiate deletion',
+                        details: 'Click the "Delete" button in the toolbar or user profile page.',
+                        image: 'Screenshot: Delete user button'
+                    },
+                    {
+                        instruction: 'Confirm deletion',
+                        details: 'Review the deletion warning message and confirm by typing the user\'s name if required.',
+                        image: 'Screenshot: Delete confirmation dialog'
+                    },
+                    {
+                        instruction: 'Verify deletion',
+                        details: 'The user is moved to "Deleted users" and can be restored within 30 days if needed.',
+                        image: 'Screenshot: Deleted users confirmation'
+                    }
+                ]
+            },
+            'restore-deleted-user': {
+                title: 'Restore Deleted User',
+                steps: [
+                    {
+                        instruction: 'Access deleted users',
+                        details: 'Navigate to Identity > Users and click on "Deleted users" to view recently deleted accounts.',
+                        image: 'Screenshot: Deleted users section'
+                    },
+                    {
+                        instruction: 'Locate the deleted user',
+                        details: 'Find the user you want to restore from the list of deleted users (available for 30 days).',
+                        image: 'Screenshot: List of deleted users'
+                    },
+                    {
+                        instruction: 'Select the user to restore',
+                        details: 'Click the checkbox next to the user\'s name or click on the user to view details.',
+                        image: 'Screenshot: Select deleted user'
+                    },
+                    {
+                        instruction: 'Restore the user',
+                        details: 'Click the "Restore user" button to begin the restoration process.',
+                        image: 'Screenshot: Restore user button'
+                    },
+                    {
+                        instruction: 'Verify restoration',
+                        details: 'The user is restored with their previous group memberships and licenses. Verify the user appears in the active users list.',
+                        image: 'Screenshot: Restored user confirmation'
+                    }
+                ]
+            },
+            'block-user-signin': {
+                title: 'Block/Unblock User Sign-in',
+                steps: [
+                    {
+                        instruction: 'Navigate to the user account',
+                        details: 'Go to Identity > Users and locate the user whose sign-in status needs to be changed.',
+                        image: 'Screenshot: User account location'
+                    },
+                    {
+                        instruction: 'Open user profile',
+                        details: 'Click on the user\'s name to access their detailed profile page.',
+                        image: 'Screenshot: User profile access'
+                    },
+                    {
+                        instruction: 'Access sign-in settings',
+                        details: 'Look for the "Block sign in" toggle or "Account status" section in the user\'s profile.',
+                        image: 'Screenshot: Sign-in status controls'
+                    },
+                    {
+                        instruction: 'Toggle sign-in status',
+                        details: 'Click the toggle to block or unblock the user\'s sign-in capability as needed.',
+                        image: 'Screenshot: Block/unblock toggle'
+                    },
+                    {
+                        instruction: 'Confirm the change',
+                        details: 'Save the changes and verify the user\'s sign-in status is updated. Blocked users cannot authenticate to any services.',
+                        image: 'Screenshot: Sign-in status confirmation'
+                    }
+                ]
+            },
+            'reset-user-password': {
+                title: 'Reset User Password',
+                steps: [
+                    {
+                        instruction: 'Locate the user account',
+                        details: 'Navigate to Identity > Users and search for the user who needs a password reset.',
+                        image: 'Screenshot: User search for password reset'
+                    },
+                    {
+                        instruction: 'Access password reset',
+                        details: 'Click on the user\'s name, then select "Reset password" from the user profile or toolbar.',
+                        image: 'Screenshot: Reset password option'
+                    },
+                    {
+                        instruction: 'Generate or set password',
+                        details: 'Choose to auto-generate a secure password or create a custom one. Decide if the user must change it on first sign-in.',
+                        image: 'Screenshot: Password reset options'
+                    },
+                    {
+                        instruction: 'Configure password requirements',
+                        details: 'Set whether the user must change the password on next sign-in and configure any additional requirements.',
+                        image: 'Screenshot: Password requirements settings'
+                    },
+                    {
+                        instruction: 'Complete password reset',
+                        details: 'Click "Reset password" and securely communicate the new password to the user through approved channels.',
+                        image: 'Screenshot: Password reset confirmation'
+                    }
+                ]
+            },
+            'assign-license': {
+                title: 'Assign User License',
+                steps: [
+                    {
+                        instruction: 'Navigate to user account',
+                        details: 'Go to Identity > Users and locate the user who needs license assignment.',
+                        image: 'Screenshot: User account for licensing'
+                    },
+                    {
+                        instruction: 'Access licenses section',
+                        details: 'Click on the user\'s name and select "Licenses" from the left menu in their profile.',
+                        image: 'Screenshot: User licenses section'
+                    },
+                    {
+                        instruction: 'Add license assignment',
+                        details: 'Click "Assignments" or "Add assignments" to begin assigning licenses to the user.',
+                        image: 'Screenshot: Add license assignments'
+                    },
+                    {
+                        instruction: 'Select license products',
+                        details: 'Choose the appropriate license products (Microsoft 365, Azure, etc.) from the available options.',
+                        image: 'Screenshot: License product selection'
+                    },
+                    {
+                        instruction: 'Configure license options',
+                        details: 'Enable or disable specific service plans within the license and set any usage location requirements.',
+                        image: 'Screenshot: License configuration options'
+                    },
+                    {
+                        instruction: 'Complete assignment',
+                        details: 'Review the license assignment and click "Save" to apply the licenses to the user.',
+                        image: 'Screenshot: License assignment confirmation'
+                    }
+                ]
+            },
+            'invite-guest-user': {
+                title: 'Invite B2B Guest User',
+                steps: [
+                    {
+                        instruction: 'Navigate to External Identities',
+                        details: 'In the Entra admin center, go to External Identities > All guest users to manage B2B guests.',
+                        image: 'Screenshot: External Identities navigation'
+                    },
+                    {
+                        instruction: 'Create new guest invitation',
+                        details: 'Click "New guest user" or "Invite user" to start the B2B invitation process.',
+                        image: 'Screenshot: New guest user button'
+                    },
+                    {
+                        instruction: 'Enter guest user information',
+                        details: 'Fill in the guest\'s email address, display name, and add a personal message for the invitation.',
+                        image: 'Screenshot: Guest invitation form'
+                    },
+                    {
+                        instruction: 'Configure guest permissions',
+                        details: 'Set appropriate guest user permissions and assign to relevant groups or applications.',
+                        image: 'Screenshot: Guest permissions configuration'
+                    },
+                    {
+                        instruction: 'Send invitation',
+                        details: 'Review the invitation details and click "Invite" to send the B2B guest invitation email.',
+                        image: 'Screenshot: Send B2B invitation'
+                    }
+                ]
+            },
+            'configure-mfa': {
+                title: 'Configure Multi-Factor Authentication',
+                steps: [
+                    {
+                        instruction: 'Navigate to Security settings',
+                        details: 'In the Entra admin center, go to "Protection" in the left menu, then select "Authentication methods".',
+                        image: 'Screenshot: Security settings navigation'
+                    },
+                    {
+                        instruction: 'Select MFA settings',
+                        details: 'Click on "Multi-factor authentication" to access the MFA configuration options.',
+                        image: 'Screenshot: MFA settings page'
+                    },
+                    {
+                        instruction: 'Configure authentication methods',
+                        details: 'Enable the desired authentication methods such as Microsoft Authenticator app, SMS, or phone calls. Set policies for which methods are required.',
+                        image: 'Screenshot: Authentication methods configuration'
+                    },
+                    {
+                        instruction: 'Set user requirements',
+                        details: 'Define which users or groups require MFA. You can apply it to all users, specific groups, or based on conditional access policies.',
+                        image: 'Screenshot: User MFA requirements'
+                    },
+                    {
+                        instruction: 'Test and verify MFA setup',
+                        details: 'Test the MFA configuration with a test user account to ensure it works correctly before applying to all users.',
+                        image: 'Screenshot: MFA testing interface'
+                    }
+                ]
+            },
+            'create-security-group': {
+                title: 'Create Security Group',
+                steps: [
+                    {
+                        instruction: 'Navigate to Groups section',
+                        details: 'In the Entra admin center, go to "Identity" then select "Groups" from the left navigation menu.',
+                        image: 'Screenshot: Groups navigation'
+                    },
+                    {
+                        instruction: 'Click "New group"',
+                        details: 'At the top of the Groups page, click the "New group" button to start creating a new security group.',
+                        image: 'Screenshot: New group button'
+                    },
+                    {
+                        instruction: 'Configure group settings',
+                        details: 'Select "Security" as the group type, enter a group name and description. Choose membership type (Assigned or Dynamic).',
+                        image: 'Screenshot: Group configuration form'
+                    },
+                    {
+                        instruction: 'Add group members',
+                        details: 'Add initial members to the group by searching for and selecting users from your organization.',
+                        image: 'Screenshot: Adding group members'
+                    },
+                    {
+                        instruction: 'Review and create group',
+                        details: 'Review the group settings and member list, then click "Create" to finalize the new security group.',
+                        image: 'Screenshot: Group creation confirmation'
+                    }
+                ]
+            },
+            'view-audit-logs': {
+                title: 'View Audit Logs',
+                steps: [
+                    {
+                        instruction: 'Navigate to Monitoring section',
+                        details: 'In the Entra admin center, go to "Monitoring & health" and select "Audit logs".',
+                        image: 'Screenshot: Audit logs navigation'
+                    },
+                    {
+                        instruction: 'Apply filters',
+                        details: 'Use the filter options to narrow down audit log results by date range, activity, user, or service.',
+                        image: 'Screenshot: Audit log filters'
+                    },
+                    {
+                        instruction: 'Review audit entries',
+                        details: 'Examine the audit log entries to understand what administrative actions were performed and by whom.',
+                        image: 'Screenshot: Audit log entries'
+                    },
+                    {
+                        instruction: 'Export audit data',
+                        details: 'If needed, export the audit log data to CSV format for further analysis or compliance reporting.',
+                        image: 'Screenshot: Export audit logs'
+                    }
+                ]
+            },
+            'review-signin-reports': {
+                title: 'Review Sign-in Reports',
+                steps: [
+                    {
+                        instruction: 'Access sign-in logs',
+                        details: 'Navigate to Monitoring & health > Sign-in logs to view user authentication activity.',
+                        image: 'Screenshot: Sign-in logs navigation'
+                    },
+                    {
+                        instruction: 'Filter sign-in data',
+                        details: 'Apply filters to view specific users, applications, dates, or sign-in status (success/failure).',
+                        image: 'Screenshot: Sign-in log filters'
+                    },
+                    {
+                        instruction: 'Analyze sign-in patterns',
+                        details: 'Review sign-in attempts, locations, devices, and any failed authentication attempts for security analysis.',
+                        image: 'Screenshot: Sign-in analysis'
+                    },
+                    {
+                        instruction: 'Export sign-in data',
+                        details: 'Export the sign-in report data for compliance, security analysis, or integration with SIEM tools.',
+                        image: 'Screenshot: Export sign-in reports'
+                    }
+                ]
+            },
+            'monitor-service-health': {
+                title: 'Monitor Service Health',
+                steps: [
+                    {
+                        instruction: 'Access Service Health dashboard',
+                        details: 'Navigate to Health > Service health to view the current status of Microsoft Entra ID services.',
+                        image: 'Screenshot: Service health dashboard'
+                    },
+                    {
+                        instruction: 'Review current issues',
+                        details: 'Check for any active service incidents, advisories, or planned maintenance affecting your tenant.',
+                        image: 'Screenshot: Current service issues'
+                    },
+                    {
+                        instruction: 'View service history',
+                        details: 'Review the service health history to understand past issues and their resolution timelines.',
+                        image: 'Screenshot: Service health history'
+                    },
+                    {
+                        instruction: 'Configure health alerts',
+                        details: 'Set up email notifications to be alerted when service health issues occur that might affect your users.',
+                        image: 'Screenshot: Health alert configuration'
+                    }
+                ]
+            },
+            'create-support-ticket': {
+                title: 'Create Support Ticket',
+                steps: [
+                    {
+                        instruction: 'Access Help + support',
+                        details: 'In the admin center, navigate to "Help + support" to create a new support request.',
+                        image: 'Screenshot: Help and support navigation'
+                    },
+                    {
+                        instruction: 'Start new support request',
+                        details: 'Click "New support request" to begin creating a ticket for technical assistance.',
+                        image: 'Screenshot: New support request'
+                    },
+                    {
+                        instruction: 'Select problem type',
+                        details: 'Choose the appropriate service (Entra ID, Microsoft 365, etc.) and problem category.',
+                        image: 'Screenshot: Problem type selection'
+                    },
+                    {
+                        instruction: 'Provide issue details',
+                        details: 'Fill in comprehensive details about the issue, including steps to reproduce, error messages, and impact assessment.',
+                        image: 'Screenshot: Issue details form'
+                    },
+                    {
+                        instruction: 'Submit support request',
+                        details: 'Review all information and submit the support ticket. You\'ll receive a case number for tracking.',
+                        image: 'Screenshot: Support ticket submission'
+                    }
+                ]
+            },
+            'change-user-password': {
+                title: 'Change User Password',
+                steps: [
+                    {
+                        instruction: 'Access user account',
+                        details: 'Navigate to Identity > Users and locate the user whose password needs to be changed.',
+                        image: 'Screenshot: User account selection'
+                    },
+                    {
+                        instruction: 'Open password settings',
+                        details: 'Click on the user\'s profile and select "Reset password" or "Authentication" section.',
+                        image: 'Screenshot: Password settings access'
+                    },
+                    {
+                        instruction: 'Set new password',
+                        details: 'Enter a new password that meets your organization\'s password policy requirements.',
+                        image: 'Screenshot: New password entry'
+                    },
+                    {
+                        instruction: 'Configure password options',
+                        details: 'Choose whether the user must change the password on next sign-in and set expiration policies.',
+                        image: 'Screenshot: Password change options'
+                    },
+                    {
+                        instruction: 'Apply password change',
+                        details: 'Save the new password and notify the user through secure channels about the password change.',
+                        image: 'Screenshot: Password change confirmation'
+                    }
+                ]
+            },
+            'reset-admin-password': {
+                title: 'Reset Administrator Password',
+                steps: [
+                    {
+                        instruction: 'Verify administrator privileges',
+                        details: 'Ensure you have sufficient permissions to reset passwords for administrator accounts.',
+                        image: 'Screenshot: Admin privilege verification'
+                    },
+                    {
+                        instruction: 'Locate administrator account',
+                        details: 'Navigate to Identity > Users and find the administrator whose password needs resetting.',
+                        image: 'Screenshot: Administrator account location'
+                    },
+                    {
+                        instruction: 'Initiate password reset',
+                        details: 'Click "Reset password" for the administrator account. Note that this may require additional approvals.',
+                        image: 'Screenshot: Admin password reset initiation'
+                    },
+                    {
+                        instruction: 'Generate secure password',
+                        details: 'Create or auto-generate a strong password that meets administrative security requirements.',
+                        image: 'Screenshot: Secure password generation'
+                    },
+                    {
+                        instruction: 'Complete reset process',
+                        details: 'Confirm the password reset and ensure the administrator is notified through secure, verified channels.',
+                        image: 'Screenshot: Admin password reset completion'
+                    }
+                ]
+            },
+            'unlock-user-account': {
+                title: 'Unlock User Account',
+                steps: [
+                    {
+                        instruction: 'Identify locked account',
+                        details: 'Navigate to Identity > Users and locate the user account that is locked out.',
+                        image: 'Screenshot: Locked account identification'
+                    },
+                    {
+                        instruction: 'Access account status',
+                        details: 'Click on the user\'s profile to view their current account status and lock details.',
+                        image: 'Screenshot: Account status view'
+                    },
+                    {
+                        instruction: 'Review lock reason',
+                        details: 'Check the reason for the account lock (failed sign-ins, security policy, etc.) before unlocking.',
+                        image: 'Screenshot: Account lock reason'
+                    },
+                    {
+                        instruction: 'Unlock the account',
+                        details: 'Click the "Unlock account" button or toggle to restore account access.',
+                        image: 'Screenshot: Account unlock action'
+                    },
+                    {
+                        instruction: 'Verify account access',
+                        details: 'Confirm the account is unlocked and notify the user that they can attempt to sign in again.',
+                        image: 'Screenshot: Account unlock verification'
+                    }
+                ]
+            },
+            'revoke-license': {
+                title: 'Revoke User License',
+                steps: [
+                    {
+                        instruction: 'Navigate to user account',
+                        details: 'Go to Identity > Users and locate the user whose license needs to be revoked.',
+                        image: 'Screenshot: User account for license removal'
+                    },
+                    {
+                        instruction: 'Access user licenses',
+                        details: 'Click on the user\'s profile and select "Licenses" from the navigation menu.',
+                        image: 'Screenshot: User licenses section'
+                    },
+                    {
+                        instruction: 'Select licenses to remove',
+                        details: 'Identify and select the specific license assignments that need to be revoked.',
+                        image: 'Screenshot: License selection for removal'
+                    },
+                    {
+                        instruction: 'Remove license assignments',
+                        details: 'Click "Remove assignments" and confirm which licenses should be revoked from the user.',
+                        image: 'Screenshot: License removal confirmation'
+                    },
+                    {
+                        instruction: 'Verify license removal',
+                        details: 'Confirm the licenses have been successfully removed and the user no longer has access to those services.',
+                        image: 'Screenshot: License removal verification'
+                    }
+                ]
+            },
+            'bulk-license-assignment': {
+                title: 'Bulk License Assignment',
+                steps: [
+                    {
+                        instruction: 'Access license management',
+                        details: 'Navigate to Identity > Users and select "Bulk operations" from the toolbar.',
+                        image: 'Screenshot: Bulk operations access'
+                    },
+                    {
+                        instruction: 'Choose bulk license assignment',
+                        details: 'Select "Bulk assign licenses" from the available bulk operation options.',
+                        image: 'Screenshot: Bulk license assignment option'
+                    },
+                    {
+                        instruction: 'Upload user list',
+                        details: 'Upload a CSV file containing the list of users who need license assignments.',
+                        image: 'Screenshot: User list upload'
+                    },
+                    {
+                        instruction: 'Select license products',
+                        details: 'Choose which license products to assign to the users in the bulk operation.',
+                        image: 'Screenshot: Bulk license product selection'
+                    },
+                    {
+                        instruction: 'Execute bulk assignment',
+                        details: 'Review the bulk assignment details and execute the operation. Monitor the progress and results.',
+                        image: 'Screenshot: Bulk assignment execution'
+                    }
+                ]
+            },
+            'view-license-usage': {
+                title: 'View License Usage Reports',
+                steps: [
+                    {
+                        instruction: 'Navigate to licensing reports',
+                        details: 'Go to Billing > Licenses or Reports > Usage to access license usage information.',
+                        image: 'Screenshot: License reports navigation'
+                    },
+                    {
+                        instruction: 'Select license type',
+                        details: 'Choose the specific license product (Microsoft 365, Azure, etc.) to view usage details.',
+                        image: 'Screenshot: License type selection'
+                    },
+                    {
+                        instruction: 'Analyze usage data',
+                        details: 'Review assigned vs. available licenses, usage patterns, and identify optimization opportunities.',
+                        image: 'Screenshot: License usage analysis'
+                    },
+                    {
+                        instruction: 'Export usage report',
+                        details: 'Export the license usage data to Excel or CSV for further analysis or budgeting purposes.',
+                        image: 'Screenshot: License usage export'
+                    }
+                ]
+            },
+            'create-m365-group': {
+                title: 'Create Microsoft 365 Group',
+                steps: [
+                    {
+                        instruction: 'Navigate to Groups section',
+                        details: 'In the Entra admin center, go to Identity > Groups to access group management.',
+                        image: 'Screenshot: Groups section navigation'
+                    },
+                    {
+                        instruction: 'Create new M365 group',
+                        details: 'Click "New group" and select "Microsoft 365" as the group type.',
+                        image: 'Screenshot: M365 group creation'
+                    },
+                    {
+                        instruction: 'Configure group properties',
+                        details: 'Enter group name, description, and configure privacy settings (Public or Private).',
+                        image: 'Screenshot: M365 group configuration'
+                    },
+                    {
+                        instruction: 'Add members and owners',
+                        details: 'Assign group owners and add initial members to the Microsoft 365 group.',
+                        image: 'Screenshot: M365 group members'
+                    },
+                    {
+                        instruction: 'Finalize group creation',
+                        details: 'Review settings and create the group. Associated SharePoint site and mailbox will be provisioned automatically.',
+                        image: 'Screenshot: M365 group creation completion'
+                    }
+                ]
+            },
+            'manage-group-members': {
+                title: 'Add/Remove Group Members',
+                steps: [
+                    {
+                        instruction: 'Locate the target group',
+                        details: 'Navigate to Identity > Groups and find the group whose membership needs to be modified.',
+                        image: 'Screenshot: Group location'
+                    },
+                    {
+                        instruction: 'Access group membership',
+                        details: 'Click on the group name and select "Members" from the group management options.',
+                        image: 'Screenshot: Group members section'
+                    },
+                    {
+                        instruction: 'Add new members',
+                        details: 'Click "Add members" and search for users to add to the group. Select multiple users if needed.',
+                        image: 'Screenshot: Adding group members'
+                    },
+                    {
+                        instruction: 'Remove existing members',
+                        details: 'Select members to remove and click "Remove members" to revoke their group membership.',
+                        image: 'Screenshot: Removing group members'
+                    },
+                    {
+                        instruction: 'Verify membership changes',
+                        details: 'Confirm that the group membership changes have been applied successfully.',
+                        image: 'Screenshot: Group membership verification'
+                    }
+                ]
+            },
+            'configure-dynamic-membership': {
+                title: 'Configure Dynamic Membership Rules',
+                steps: [
+                    {
+                        instruction: 'Access dynamic group settings',
+                        details: 'Navigate to the group and select "Dynamic membership rules" from the group configuration.',
+                        image: 'Screenshot: Dynamic membership access'
+                    },
+                    {
+                        instruction: 'Create membership rule',
+                        details: 'Use the rule builder to create conditions based on user attributes like department, location, or job title.',
+                        image: 'Screenshot: Dynamic rule builder'
+                    },
+                    {
+                        instruction: 'Test the rule',
+                        details: 'Use the "Validate rule" feature to test your dynamic membership rule against existing users.',
+                        image: 'Screenshot: Rule validation'
+                    },
+                    {
+                        instruction: 'Apply dynamic rule',
+                        details: 'Save the dynamic membership rule and allow time for the system to process membership changes.',
+                        image: 'Screenshot: Dynamic rule application'
+                    },
+                    {
+                        instruction: 'Monitor membership updates',
+                        details: 'Check the group membership periodically to ensure the dynamic rule is working as expected.',
+                        image: 'Screenshot: Dynamic membership monitoring'
+                    }
+                ]
+            },
+            'manage-auth-methods': {
+                title: 'Manage User Authentication Methods',
+                steps: [
+                    {
+                        instruction: 'Access authentication settings',
+                        details: 'Navigate to Protection > Authentication methods to manage user authentication options.',
+                        image: 'Screenshot: Authentication methods navigation'
+                    },
+                    {
+                        instruction: 'Configure method policies',
+                        details: 'Enable or disable specific authentication methods like SMS, voice calls, or authenticator apps.',
+                        image: 'Screenshot: Authentication method policies'
+                    },
+                    {
+                        instruction: 'Set user-specific methods',
+                        details: 'For individual users, go to their profile and manage their registered authentication methods.',
+                        image: 'Screenshot: User authentication methods'
+                    },
+                    {
+                        instruction: 'Reset authentication methods',
+                        details: 'Remove or reset a user\'s authentication methods if they\'ve lost access to their devices.',
+                        image: 'Screenshot: Reset authentication methods'
+                    },
+                    {
+                        instruction: 'Verify method configuration',
+                        details: 'Test the authentication method changes to ensure users can still access their accounts.',
+                        image: 'Screenshot: Authentication verification'
+                    }
+                ]
+            },
+            'configure-signin-policies': {
+                title: 'Configure User Sign-in Policies',
+                steps: [
+                    {
+                        instruction: 'Access security policies',
+                        details: 'Navigate to Protection > Conditional Access to configure sign-in policies.',
+                        image: 'Screenshot: Conditional access navigation'
+                    },
+                    {
+                        instruction: 'Create new policy',
+                        details: 'Click "New policy" to create a custom sign-in policy for your users.',
+                        image: 'Screenshot: New policy creation'
+                    },
+                    {
+                        instruction: 'Define policy conditions',
+                        details: 'Set conditions like user/group assignments, applications, and sign-in risk levels.',
+                        image: 'Screenshot: Policy conditions'
+                    },
+                    {
+                        instruction: 'Configure access controls',
+                        details: 'Define what happens when conditions are met (block access, require MFA, etc.).',
+                        image: 'Screenshot: Access controls configuration'
+                    },
+                    {
+                        instruction: 'Enable and test policy',
+                        details: 'Enable the policy in report-only mode first, then test before full enforcement.',
+                        image: 'Screenshot: Policy testing and enablement'
+                    }
+                ]
+            },
+            'block-legacy-auth': {
+                title: 'Block Legacy Authentication',
+                steps: [
+                    {
+                        instruction: 'Access conditional access',
+                        details: 'Navigate to Protection > Conditional Access to create a legacy authentication blocking policy.',
+                        image: 'Screenshot: Conditional access for legacy auth'
+                    },
+                    {
+                        instruction: 'Create blocking policy',
+                        details: 'Create a new policy specifically targeting legacy authentication protocols.',
+                        image: 'Screenshot: Legacy auth blocking policy'
+                    },
+                    {
+                        instruction: 'Define legacy auth conditions',
+                        details: 'Set conditions to identify and target legacy authentication attempts.',
+                        image: 'Screenshot: Legacy auth conditions'
+                    },
+                    {
+                        instruction: 'Configure block action',
+                        details: 'Set the access control to "Block access" for legacy authentication attempts.',
+                        image: 'Screenshot: Block legacy auth action'
+                    },
+                    {
+                        instruction: 'Monitor and enforce',
+                        details: 'Enable the policy and monitor sign-in logs to ensure legacy authentication is properly blocked.',
+                        image: 'Screenshot: Legacy auth monitoring'
+                    }
+                ]
+            },
+            'manage-guest-permissions': {
+                title: 'Set Guest User Permissions',
+                steps: [
+                    {
+                        instruction: 'Access external collaboration settings',
+                        details: 'Navigate to External Identities > External collaboration settings to manage guest permissions.',
+                        image: 'Screenshot: External collaboration settings'
+                    },
+                    {
+                        instruction: 'Configure guest access permissions',
+                        details: 'Set the level of access guest users have to directory information and resources.',
+                        image: 'Screenshot: Guest access configuration'
+                    },
+                    {
+                        instruction: 'Set invitation restrictions',
+                        details: 'Define who can invite guest users and which domains are allowed or blocked.',
+                        image: 'Screenshot: Guest invitation restrictions'
+                    },
+                    {
+                        instruction: 'Configure collaboration restrictions',
+                        details: 'Set restrictions on which applications and resources guest users can access.',
+                        image: 'Screenshot: Guest collaboration restrictions'
+                    },
+                    {
+                        instruction: 'Apply permission changes',
+                        details: 'Save the guest permission settings and verify they apply to existing and new guest users.',
+                        image: 'Screenshot: Guest permissions application'
+                    }
+                ]
+            },
+            'remove-guest-user': {
+                title: 'Remove Guest User Account',
+                steps: [
+                    {
+                        instruction: 'Locate guest user',
+                        details: 'Navigate to External Identities > All guest users to find the guest account to remove.',
+                        image: 'Screenshot: Guest user location'
+                    },
+                    {
+                        instruction: 'Review guest access',
+                        details: 'Check what resources and applications the guest user currently has access to.',
+                        image: 'Screenshot: Guest access review'
+                    },
+                    {
+                        instruction: 'Remove guest user',
+                        details: 'Select the guest user and click "Delete" to remove their account from your tenant.',
+                        image: 'Screenshot: Guest user removal'
+                    },
+                    {
+                        instruction: 'Confirm deletion',
+                        details: 'Confirm the deletion and verify that the guest user no longer appears in your directory.',
+                        image: 'Screenshot: Guest deletion confirmation'
+                    }
+                ]
+            },
+            'bulk-guest-invitation': {
+                title: 'Bulk Guest User Invitation',
+                steps: [
+                    {
+                        instruction: 'Access bulk invitation',
+                        details: 'Navigate to External Identities > All guest users and select "Bulk invite".',
+                        image: 'Screenshot: Bulk guest invitation access'
+                    },
+                    {
+                        instruction: 'Download template',
+                        details: 'Download the CSV template for bulk guest user invitations.',
+                        image: 'Screenshot: Guest invitation template'
+                    },
+                    {
+                        instruction: 'Prepare guest list',
+                        details: 'Fill in the CSV template with guest user email addresses and invitation details.',
+                        image: 'Screenshot: Guest list preparation'
+                    },
+                    {
+                        instruction: 'Upload guest list',
+                        details: 'Upload the completed CSV file with guest user information.',
+                        image: 'Screenshot: Guest list upload'
+                    },
+                    {
+                        instruction: 'Send bulk invitations',
+                        details: 'Review and send the bulk guest invitations. Monitor the invitation status.',
+                        image: 'Screenshot: Bulk invitation execution'
+                    }
+                ]
+            },
+            'configure-app-registration': {
+                title: 'Configure App Registration Settings',
+                steps: [
+                    {
+                        instruction: 'Access user settings',
+                        details: 'Navigate to Identity > Users > User settings to configure application registration permissions.',
+                        image: 'Screenshot: User settings navigation'
+                    },
+                    {
+                        instruction: 'Locate app registration setting',
+                        details: 'Find the "Users can register applications" setting in the user configuration options.',
+                        image: 'Screenshot: App registration setting'
+                    },
+                    {
+                        instruction: 'Configure registration permissions',
+                        details: 'Toggle the setting to allow or restrict users from registering applications in your tenant.',
+                        image: 'Screenshot: App registration configuration'
+                    },
+                    {
+                        instruction: 'Set consent permissions',
+                        details: 'Configure whether users can consent to applications accessing company data on their behalf.',
+                        image: 'Screenshot: App consent configuration'
+                    },
+                    {
+                        instruction: 'Save configuration changes',
+                        details: 'Apply the app registration settings and verify they take effect for your users.',
+                        image: 'Screenshot: App settings confirmation'
+                    }
+                ]
+            },
+            'manage-profile-editing': {
+                title: 'Manage Profile Editing Permissions',
+                steps: [
+                    {
+                        instruction: 'Access user settings',
+                        details: 'Navigate to Identity > Users > User settings to manage profile editing permissions.',
+                        image: 'Screenshot: Profile settings navigation'
+                    },
+                    {
+                        instruction: 'Configure profile restrictions',
+                        details: 'Set which profile fields users can edit themselves vs. require administrator changes.',
+                        image: 'Screenshot: Profile editing restrictions'
+                    },
+                    {
+                        instruction: 'Set LinkedIn integration',
+                        details: 'Configure whether users can connect their LinkedIn profiles to their work accounts.',
+                        image: 'Screenshot: LinkedIn integration settings'
+                    },
+                    {
+                        instruction: 'Manage profile photo permissions',
+                        details: 'Set permissions for users to upload and change their profile photos.',
+                        image: 'Screenshot: Profile photo permissions'
+                    },
+                    {
+                        instruction: 'Apply profile settings',
+                        details: 'Save the profile editing configuration and verify it applies to user accounts.',
+                        image: 'Screenshot: Profile settings application'
+                    }
+                ]
+            },
+            'configure-admin-units': {
+                title: 'Create Administrative Units',
+                steps: [
+                    {
+                        instruction: 'Navigate to administrative units',
+                        details: 'Go to Identity > Roles and administrators > Administrative units to manage scope restrictions.',
+                        image: 'Screenshot: Administrative units navigation'
+                    },
+                    {
+                        instruction: 'Create new administrative unit',
+                        details: 'Click "New administrative unit" to create a new scope-restricted management unit.',
+                        image: 'Screenshot: New administrative unit'
+                    },
+                    {
+                        instruction: 'Configure unit properties',
+                        details: 'Set the name, description, and other properties for the administrative unit.',
+                        image: 'Screenshot: Admin unit configuration'
+                    },
+                    {
+                        instruction: 'Add members to unit',
+                        details: 'Add users and groups that should be managed within this administrative unit scope.',
+                        image: 'Screenshot: Admin unit members'
+                    },
+                    {
+                        instruction: 'Assign scoped administrators',
+                        details: 'Assign User Administrator or other roles scoped to this administrative unit.',
+                        image: 'Screenshot: Scoped administrator assignment'
+                    }
+                ]
+            },
+            'assign-admin-roles': {
+                title: 'Assign Administrative Roles',
+                steps: [
+                    {
+                        instruction: 'Access role management',
+                        details: 'Navigate to Identity > Roles and administrators to manage administrative role assignments.',
+                        image: 'Screenshot: Role management navigation'
+                    },
+                    {
+                        instruction: 'Select target user',
+                        details: 'Find the user who needs administrative role assignment from the user directory.',
+                        image: 'Screenshot: User selection for role assignment'
+                    },
+                    {
+                        instruction: 'Choose administrative role',
+                        details: 'Select the appropriate administrative role (User Administrator, Groups Administrator, etc.).',
+                        image: 'Screenshot: Administrative role selection'
+                    },
+                    {
+                        instruction: 'Configure role scope',
+                        details: 'Set the scope of the administrative role (directory-wide or administrative unit).',
+                        image: 'Screenshot: Role scope configuration'
+                    },
+                    {
+                        instruction: 'Assign and verify role',
+                        details: 'Complete the role assignment and verify the user has the appropriate administrative permissions.',
+                        image: 'Screenshot: Role assignment verification'
+                    }
+                ]
+            },
+            'manage-device-registration': {
+                title: 'Manage Device Registration',
+                steps: [
+                    {
+                        instruction: 'Access device settings',
+                        details: 'Navigate to Identity > Devices > Device settings to manage device registration policies.',
+                        image: 'Screenshot: Device settings navigation'
+                    },
+                    {
+                        instruction: 'Configure registration settings',
+                        details: 'Set whether users can register devices and what types of devices are allowed.',
+                        image: 'Screenshot: Device registration configuration'
+                    },
+                    {
+                        instruction: 'Set device limits',
+                        details: 'Configure the maximum number of devices each user can register.',
+                        image: 'Screenshot: Device limits configuration'
+                    },
+                    {
+                        instruction: 'Manage user device access',
+                        details: 'Review individual user device registrations and remove devices if necessary.',
+                        image: 'Screenshot: User device management'
+                    },
+                    {
+                        instruction: 'Apply device policies',
+                        details: 'Ensure device registration settings work with your conditional access policies.',
+                        image: 'Screenshot: Device policy integration'
+                    }
+                ]
+            },
+            'configure-device-compliance': {
+                title: 'Configure Device Compliance',
+                steps: [
+                    {
+                        instruction: 'Access compliance policies',
+                        details: 'Navigate to endpoint management or device compliance settings in the admin center.',
+                        image: 'Screenshot: Device compliance navigation'
+                    },
+                    {
+                        instruction: 'Create compliance policy',
+                        details: 'Create a new device compliance policy defining security requirements for devices.',
+                        image: 'Screenshot: Compliance policy creation'
+                    },
+                    {
+                        instruction: 'Set compliance requirements',
+                        details: 'Define requirements like PIN length, encryption, OS version, and security patches.',
+                        image: 'Screenshot: Compliance requirements'
+                    },
+                    {
+                        instruction: 'Assign policy to users',
+                        details: 'Assign the compliance policy to specific users or groups in your organization.',
+                        image: 'Screenshot: Compliance policy assignment'
+                    },
+                    {
+                        instruction: 'Monitor compliance status',
+                        details: 'Review device compliance reports to ensure devices meet your security requirements.',
+                        image: 'Screenshot: Compliance monitoring'
+                    }
+                ]
+            },
+            'view-device-reports': {
+                title: 'View Device Reports',
+                steps: [
+                    {
+                        instruction: 'Access device reporting',
+                        details: 'Navigate to Identity > Devices > All devices to view device registration reports.',
+                        image: 'Screenshot: Device reporting navigation'
+                    },
+                    {
+                        instruction: 'Filter device data',
+                        details: 'Apply filters to view specific device types, users, or registration status.',
+                        image: 'Screenshot: Device report filters'
+                    },
+                    {
+                        instruction: 'Analyze device information',
+                        details: 'Review device details including OS, compliance status, and last activity.',
+                        image: 'Screenshot: Device analysis'
+                    },
+                    {
+                        instruction: 'Export device reports',
+                        details: 'Export device registration and compliance data for analysis or compliance auditing.',
+                        image: 'Screenshot: Device report export'
+                    }
+                ]
+            }
+        };
+                        
+
+        // Current task state
+        let currentTask = null;
+        let currentStep = 0;
+
+        // Initialize the application
+        function init() {
+            showDashboard();
+        }
+
+        // Show dashboard
+        function showDashboard() {
+            document.getElementById('dashboard').style.display = 'block';
+            document.getElementById('wizard').style.display = 'none';
+            currentTask = null;
+            currentStep = 0;
+        }
+
+        // Start a specific task
+        function startTask(taskId) {
+            currentTask = tasks[taskId];
+            if (!currentTask) return;
+
+            currentStep = 0;
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('wizard').style.display = 'block';
+            
+            updateWizardUI();
+        }
+
+        // Update wizard UI
+        function updateWizardUI() {
+            if (!currentTask) return;
+
+            const step = currentTask.steps[currentStep];
+            const totalSteps = currentTask.steps.length;
+
+            // Update title and progress
+            document.getElementById('wizard-title').textContent = currentTask.title;
+            document.getElementById('step-counter').textContent = `Step ${currentStep + 1} of ${totalSteps}`;
+            
+            // Update progress bar
+            const progressPercent = ((currentStep + 1) / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = progressPercent + '%';
+
+            // Update step content
+            document.getElementById('step-instruction').textContent = step.instruction;
+            document.getElementById('step-details').textContent = step.details;
+            document.getElementById('step-image').textContent = step.image;
+
+            // Update button states
+            document.getElementById('prev-btn').style.display = currentStep > 0 ? 'inline-block' : 'none';
+            
+            if (currentStep < totalSteps - 1) {
+                document.getElementById('next-btn').style.display = 'inline-block';
+                document.getElementById('complete-btn').classList.add('hidden');
+            } else {
+                document.getElementById('next-btn').style.display = 'none';
+                document.getElementById('complete-btn').classList.remove('hidden');
+            }
+
+            // Hide completion message
+            document.getElementById('completion-message').classList.add('hidden');
+        }
+
+        // Navigate to next step
+        function nextStep() {
+            if (!currentTask || currentStep >= currentTask.steps.length - 1) return;
+            
+            currentStep++;
+            updateWizardUI();
+        }
+
+        // Navigate to previous step
+        function previousStep() {
+            if (!currentTask || currentStep <= 0) return;
+            
+            currentStep--;
+            updateWizardUI();
+        }
+
+        // Complete current task
+        function completeTask() {
+            document.getElementById('step-content').style.display = 'none';
+            document.getElementById('completion-message').classList.remove('hidden');
+            document.getElementById('prev-btn').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            document.getElementById('complete-btn').classList.add('hidden');
+        }
+
+        // Return to dashboard
+        function backToDashboard() {
+            showDashboard();
+        }
+
+        // Initialize when page loads
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
