@@ -243,6 +243,223 @@
             display: none !important;
         }
 
+        .footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-section h4 {
+            color: #3498db;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .footer-section a {
+            color: #3498db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #5dade2;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #5dade2;
+            text-decoration: underline;
+        }
+
+        .footer-links span {
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            padding: 25px 30px 20px;
+            border-bottom: 1px solid #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #0078d4;
+            font-size: 1.5rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #6c757d;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: #f8f9fa;
+            color: #495057;
+        }
+
+        .modal-body {
+            padding: 25px 30px 30px;
+        }
+
+        .modal-body h3 {
+            color: #495057;
+            margin: 25px 0 15px 0;
+            font-size: 1.2rem;
+        }
+
+        .modal-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .modal-body li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f8f9fa;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-body li:last-child {
+            border-bottom: none;
+        }
+
+        .modal-body p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .modal-body a {
+            color: #0078d4;
+            text-decoration: none;
+        }
+
+        .modal-body a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 25px;
+            }
+            
+            .footer-bottom-content {
+                text-align: center;
+            }
+            
+            .footer-links {
+                gap: 10px;
+            }
+            
+            .modal-content {
+                margin: 10px;
+                max-height: 90vh;
+            }
+            
+            .modal-header,
+            .modal-body {
+                padding: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2rem;
@@ -450,6 +667,84 @@
                     <h2>🎉 Task Completed!</h2>
                     <p>Great job! You've successfully completed this administrative task.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Microsoft Entra Administrator Training</h4>
+                <p>Interactive step-by-step guides for common administrative tasks</p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Open Source</h4>
+                <p>This project is licensed under the <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener">GNU General Public License v3.0</a></p>
+                <p><a href="https://github.com/lordpixma/entra-admin-training" target="_blank" rel="noopener">View Source Code</a></p>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <p>&copy; 2025 Microsoft Entra Administrator Training</p>
+                <p>This is an educational resource and is not affiliated with Microsoft Corporation.</p>
+                <p>Microsoft, Microsoft Entra, and related trademarks are property of Microsoft Corporation.</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>
+                    <strong>GNU GPL v3.0 License:</strong> 
+                    You are free to use, modify, and distribute this software under the terms of the GNU General Public License. 
+                    <a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener">Read full license</a>
+                </p>
+                <div class="footer-links">
+                    <a href="#" onclick="showLicenseInfo()">License Details</a>
+                    <span>•</span>
+                    <a href="#" onclick="showContributeInfo()">Contribute</a>
+                    <span>•</span>
+                    <a href="#" onclick="showAbout()">About</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- License Modal -->
+    <div id="license-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>GNU General Public License v3.0</h2>
+                <button class="modal-close" onclick="closeModal('license-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>Permissions</h3>
+                <ul>
+                    <li>✅ Commercial use</li>
+                    <li>✅ Modification</li>
+                    <li>✅ Distribution</li>
+                    <li>✅ Patent use</li>
+                    <li>✅ Private use</li>
+                </ul>
+                
+                <h3>Conditions</h3>
+                <ul>
+                    <li>📋 License and copyright notice</li>
+                    <li>📋 State changes</li>
+                    <li>📋 Disclose source</li>
+                    <li>📋 Same license</li>
+                </ul>
+                
+                <h3>Limitations</h3>
+                <ul>
+                    <li>❌ Liability</li>
+                    <li>❌ Warranty</li>
+                </ul>
+                
+                <p><strong>Summary:</strong> This is a strong copyleft license that requires any derivative work to be distributed under the same license terms. This ensures that improvements and modifications remain open source.</p>
+                
+                <p><a href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank" rel="noopener">Read the full GNU GPL v3.0 license text</a></p>
             </div>
         </div>
     </div>
@@ -1641,6 +1936,43 @@
 
         // Initialize when page loads
         window.addEventListener('load', init);
+
+        // Footer modal functions
+        function showLicenseInfo() {
+            document.getElementById('license-modal').classList.remove('hidden');
+        }
+
+        function showContributeInfo() {
+            alert('Want to contribute?\n\n1. Fork the repository on GitHub\n2. Make your improvements\n3. Submit a pull request\n\nThanks for helping improve this training resource!');
+        }
+
+        function showAbout() {
+            alert('Microsoft Entra Administrator Training\n\nAn open-source, interactive training platform for learning Microsoft Entra ID administration tasks.\n\nBuilt with vanilla HTML, CSS, and JavaScript.\nLicensed under GNU GPL v3.0\n\nNot affiliated with Microsoft Corporation.');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.classList.add('hidden');
+                }
+            });
+        });
+
+        // Close modal with Escape key
+        window.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modals = document.querySelectorAll('.modal');
+                modals.forEach(modal => {
+                    modal.classList.add('hidden');
+                });
+            }
+        });
     </script>
 </body>
 </html>
