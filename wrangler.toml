@@ -1,0 +1,50 @@
+name = "entra-admin-training"
+compatibility_date = "2025-05-27"
+
+# Build configuration
+[build]
+command = ""
+cwd = ""
+watch_dir = ""
+
+# KV Namespace binding for training modules
+[[kv_namespaces]]
+binding = "TRAINING_MODULES"
+id = "673232f6eeab4e34bab939d8f06df67d"
+preview_id = "YOUR_PREVIEW_KV_NAMESPACE_ID_HERE"
+
+# Environment configuration for production
+[env.production]
+name = "entra-admin-training"
+
+# Production KV namespace
+[[env.production.kv_namespaces]]
+binding = "TRAINING_MODULES"
+id = "673232f6eeab4e34bab939d8f06df67d"
+
+# Development environment (optional)
+[env.development]
+name = "entra-admin-training-dev"
+
+[[env.development.kv_namespaces]]
+binding = "TRAINING_MODULES"
+id = "YOUR_DEV_KV_NAMESPACE_ID_HERE"
+
+# Pages configuration
+[pages_build_output_dir = "."]
+
+# Custom domains (if you have any)
+# route = { pattern = "training.tayoodekunle.com", custom_domain = true }
+
+# Environment variables (set these in Cloudflare dashboard)
+# ADMIN_PASSWORD = "your-secure-admin-password"  # Optional: for admin auth
+
+# Compatibility flags
+compatibility_flags = []
+
+# Worker limits
+limits = { cpu_ms = 10000 }
+
+# Observability settings
+[observability]
+enabled = true
