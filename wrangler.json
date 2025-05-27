@@ -3,7 +3,7 @@
   "compatibility_date": "2025-05-27",
   "assets": {
     "directory": "./",
-    "include": ["*.html", "*.css", "*.js", "*.png", "*.jpg", "*.svg", "*.ico"],
-    "exclude": ["node_modules", ".git", "README.md"]
+    "include": ["index.html"],
+    "binding": "ASSETS"
   }
 }
