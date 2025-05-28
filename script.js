@@ -48,12 +48,19 @@ async function loadTrainingModules() {
         
         if (response.ok) {
             const dynamicModules = await response.json();
-            tasks = { ...tasks, ...dynamicModules };
             
-            console.log(`Loaded ${Object.keys(dynamicModules).length} dynamic modules`);
+            // Check if we got any modules
+            const moduleCount = Object.keys(dynamicModules).length;
+            console.log(`Loaded ${moduleCount} dynamic modules`);
+            
+            if (moduleCount > 0) {
+                tasks = { ...tasks, ...dynamicModules };
+            } else {
+                console.log('No dynamic modules found, using static modules');
+                loadStaticModules();
+            }
         } else {
-            console.log('No dynamic modules found, using static modules');
-            // Fall back to hardcoded modules if API fails
+            console.log('API call failed, using static modules');
             loadStaticModules();
         }
         
@@ -141,8 +148,98 @@ function loadStaticModules() {
                     image: 'Screenshot: MFA testing interface'
                 }
             ]
+        },
+        'reset-user-password': {
+            title: 'Reset User Password',
+            category: 'Password Management',
+            icon: '🔄',
+            steps: [
+                {
+                    instruction: 'Locate the user account',
+                    details: 'Navigate to Identity > Users and search for the user who needs a password reset.',
+                    image: 'Screenshot: User search for password reset'
+                },
+                {
+                    instruction: 'Access password reset',
+                    details: 'Click on the user\'s name, then select "Reset password" from the user profile or toolbar.',
+                    image: 'Screenshot: Reset password option'
+                },
+                {
+                    instruction: 'Generate or set password',
+                    details: 'Choose to auto-generate a secure password or create a custom one.',
+                    image: 'Screenshot: Password reset options'
+                },
+                {
+                    instruction: 'Complete password reset',
+                    details: 'Click "Reset password" and securely communicate the new password to the user.',
+                    image: 'Screenshot: Password reset confirmation'
+                }
+            ]
+        },
+        'assign-license': {
+            title: 'Assign User License',
+            category: 'License Management',
+            icon: '📋',
+            steps: [
+                {
+                    instruction: 'Navigate to user account',
+                    details: 'Go to Identity > Users and locate the user who needs license assignment.',
+                    image: 'Screenshot: User account for licensing'
+                },
+                {
+                    instruction: 'Access licenses section',
+                    details: 'Click on the user\'s name and select "Licenses" from the left menu.',
+                    image: 'Screenshot: User licenses section'
+                },
+                {
+                    instruction: 'Add license assignment',
+                    details: 'Click "Add assignments" to begin assigning licenses to the user.',
+                    image: 'Screenshot: Add license assignments'
+                },
+                {
+                    instruction: 'Select license products',
+                    details: 'Choose the appropriate license products from the available options.',
+                    image: 'Screenshot: License product selection'
+                },
+                {
+                    instruction: 'Complete assignment',
+                    details: 'Review the license assignment and click "Save" to apply the licenses.',
+                    image: 'Screenshot: License assignment confirmation'
+                }
+            ]
+        },
+        'create-security-group': {
+            title: 'Create Security Group',
+            category: 'Group Management',
+            icon: '🛡️',
+            steps: [
+                {
+                    instruction: 'Navigate to Groups section',
+                    details: 'In the Entra admin center, go to "Identity" then select "Groups".',
+                    image: 'Screenshot: Groups navigation'
+                },
+                {
+                    instruction: 'Click "New group"',
+                    details: 'Click the "New group" button to start creating a new security group.',
+                    image: 'Screenshot: New group button'
+                },
+                {
+                    instruction: 'Configure group settings',
+                    details: 'Select "Security" as the group type, enter name and description.',
+                    image: 'Screenshot: Group configuration form'
+                },
+                {
+                    instruction: 'Add group members',
+                    details: 'Add initial members by searching for users in your organization.',
+                    image: 'Screenshot: Adding group members'
+                },
+                {
+                    instruction: 'Create group',
+                    details: 'Review settings and click "Create" to finalize the security group.',
+                    image: 'Screenshot: Group creation confirmation'
+                }
+            ]
         }
-        // Add more static fallback modules as needed
     };
 }
 
@@ -293,8 +390,28 @@ function setupHeroCTA() {
             scrollToTraining();
         });
     } else {
-        console.log('Hero CTA button not found');
-        setTimeout(setupHeroCTA, 100);
+        console.log('Hero CTA button not found, retrying...');
+        // Try again after a short delay, up to 10 times
+        const maxRetries = 10;
+        let retryCount = 0;
+        
+        const retryInterval = setInterval(() => {
+            const button = document.querySelector('.hero-cta');
+            retryCount++;
+            
+            if (button) {
+                console.log(`Hero CTA button found on retry ${retryCount}`);
+                button.removeAttribute('onclick');
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    scrollToTraining();
+                });
+                clearInterval(retryInterval);
+            } else if (retryCount >= maxRetries) {
+                console.log('Hero CTA button not found after maximum retries');
+                clearInterval(retryInterval);
+            }
+        }, 200);
     }
 }
 
