@@ -12,6 +12,29 @@
 </head>
 <body>
     <div class="page-wrapper">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-content">
+                    <div class="nav-brand">
+                        <span class="nav-logo">🎓</span>
+                        <span class="nav-title">Entra Training</span>
+                    </div>
+                    <div class="nav-actions">
+                        <button class="nav-button" onclick="toggleSearch()" title="Search modules">
+                            🔍
+                        </button>
+                        <button class="nav-button" onclick="toggleDarkMode()" title="Toggle dark mode">
+                            🌙
+                        </button>
+                        <button class="nav-button" onclick="showHelp()" title="Help">
+                            ❓
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
         <!-- Hero Header -->
         <header class="hero">
             <div class="hero-background">
@@ -50,6 +73,24 @@
         <!-- Main Content -->
         <main class="main-content">
             <div class="container">
+                <!-- Search Bar -->
+                <div id="search-container" class="search-container hidden">
+                    <div class="search-bar">
+                        <input type="text" id="module-search" placeholder="Search training modules..." class="search-input">
+                        <div class="search-filters">
+                            <select id="difficulty-filter" class="search-filter">
+                                <option value="">All Difficulties</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                            <select id="category-filter" class="search-filter">
+                                <option value="">All Categories</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Dashboard -->
                 <div id="dashboard" class="dashboard">
                     <div class="section-header">
@@ -439,6 +480,60 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Help Modal -->
+    <div id="help-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>❓ Help & Getting Started</h3>
+                <button class="modal-close" onclick="closeModal('help-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h3>How to Use This Training Platform</h3>
+                <div class="help-section">
+                    <h4>🎯 Getting Started</h4>
+                    <ol>
+                        <li>Browse training modules by category</li>
+                        <li>Check difficulty level and time estimates</li>
+                        <li>Complete prerequisites before advanced modules</li>
+                        <li>Follow step-by-step instructions</li>
+                        <li>Practice in your own test environment</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h4>📊 Module Information</h4>
+                    <ul>
+                        <li><strong>🟢 Beginner:</strong> Basic concepts, no prior experience needed</li>
+                        <li><strong>🟡 Intermediate:</strong> Some experience required, moderate complexity</li>
+                        <li><strong>🔴 Advanced:</strong> Extensive experience needed, complex scenarios</li>
+                        <li><strong>⏱️ Time Estimates:</strong> Approximate completion time</li>
+                        <li><strong>📚 Prerequisites:</strong> Modules to complete first</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>🔍 Features</h4>
+                    <ul>
+                        <li><strong>Search:</strong> Find modules by name or content</li>
+                        <li><strong>Filter:</strong> Filter by difficulty or category</li>
+                        <li><strong>Dark Mode:</strong> Toggle for comfortable viewing</li>
+                        <li><strong>Progress Tracking:</strong> Track your learning journey</li>
+                    </ul>
+                </div>
+
+                <div class="help-section">
+                    <h4>⚠️ Important Notes</h4>
+                    <ul>
+                        <li>Always practice in a test environment first</li>
+                        <li>This is educational content, not official Microsoft training</li>
+                        <li>Verify steps with current Microsoft documentation</li>
+                        <li>Some features require appropriate licenses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script></script>
 </body>
 </html>

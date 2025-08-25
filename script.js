@@ -89,6 +89,9 @@ function loadStaticModules() {
             title: 'Create New User Account',
             category: 'User Account Management',
             icon: '✨',
+            difficulty: 'Beginner',
+            estimatedTime: '8 minutes',
+            prerequisites: [],
             steps: [
                 {
                     instruction: 'Navigate to the Microsoft Entra admin center',
@@ -121,6 +124,9 @@ function loadStaticModules() {
             title: 'Configure Multi-Factor Authentication',
             category: 'Authentication & Security',
             icon: '🔒',
+            difficulty: 'Intermediate',
+            estimatedTime: '20 minutes',
+            prerequisites: [],
             steps: [
                 {
                     instruction: 'Navigate to Security settings',
@@ -153,6 +159,9 @@ function loadStaticModules() {
             title: 'Reset User Password',
             category: 'Password Management',
             icon: '🔄',
+            difficulty: 'Beginner',
+            estimatedTime: '5 minutes',
+            prerequisites: [],
             steps: [
                 {
                     instruction: 'Locate the user account',
@@ -180,6 +189,9 @@ function loadStaticModules() {
             title: 'Assign User License',
             category: 'License Management',
             icon: '📋',
+            difficulty: 'Beginner',
+            estimatedTime: '10 minutes',
+            prerequisites: ['create-user'],
             steps: [
                 {
                     instruction: 'Navigate to user account',
@@ -212,6 +224,9 @@ function loadStaticModules() {
             title: 'Create Security Group',
             category: 'Group Management',
             icon: '🛡️',
+            difficulty: 'Beginner',
+            estimatedTime: '10 minutes',
+            prerequisites: [],
             steps: [
                 {
                     instruction: 'Navigate to Groups section',
@@ -237,6 +252,496 @@ function loadStaticModules() {
                     instruction: 'Create group',
                     details: 'Review settings and click "Create" to finalize the security group.',
                     image: 'Screenshot: Group creation confirmation'
+                }
+            ]
+        },
+        'create-m365-group': {
+            title: 'Create Microsoft 365 Group',
+            category: 'Group Management',
+            icon: '📧',
+            difficulty: 'Beginner',
+            estimatedTime: '15 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to Groups section',
+                    details: 'In the Entra admin center, go to "Identity" then select "Groups".',
+                    image: 'Screenshot: Groups navigation'
+                },
+                {
+                    instruction: 'Create new Microsoft 365 group',
+                    details: 'Click "New group" and select "Microsoft 365" as the group type.',
+                    image: 'Screenshot: M365 group type selection'
+                },
+                {
+                    instruction: 'Configure group details',
+                    details: 'Enter group name, email address, description, and privacy settings.',
+                    image: 'Screenshot: M365 group configuration'
+                },
+                {
+                    instruction: 'Add members and owners',
+                    details: 'Add initial members and designate group owners for management.',
+                    image: 'Screenshot: Adding members and owners'
+                },
+                {
+                    instruction: 'Review and create',
+                    details: 'Review all settings and create the Microsoft 365 group.',
+                    image: 'Screenshot: M365 group creation confirmation'
+                }
+            ]
+        },
+        'manage-dynamic-groups': {
+            title: 'Configure Dynamic Group Membership',
+            category: 'Group Management',
+            icon: '🔄',
+            difficulty: 'Intermediate',
+            estimatedTime: '20 minutes',
+            prerequisites: ['create-security-group'],
+            steps: [
+                {
+                    instruction: 'Navigate to existing group',
+                    details: 'Go to Identity > Groups and select an existing security group.',
+                    image: 'Screenshot: Selecting existing group'
+                },
+                {
+                    instruction: 'Enable dynamic membership',
+                    details: 'In group properties, change membership type to "Dynamic User".',
+                    image: 'Screenshot: Dynamic membership option'
+                },
+                {
+                    instruction: 'Create membership rules',
+                    details: 'Define rules using user attributes like department, location, or job title.',
+                    image: 'Screenshot: Dynamic rule builder'
+                },
+                {
+                    instruction: 'Test membership rules',
+                    details: 'Use the rule builder to validate that your rules return expected users.',
+                    image: 'Screenshot: Rule validation'
+                },
+                {
+                    instruction: 'Save and monitor',
+                    details: 'Save the dynamic group configuration and monitor membership updates.',
+                    image: 'Screenshot: Dynamic group monitoring'
+                }
+            ]
+        },
+        'manage-guest-users': {
+            title: 'Invite External Guest Users',
+            category: 'B2B Guest Management',
+            icon: '👥',
+            difficulty: 'Beginner',
+            estimatedTime: '12 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to Users section',
+                    details: 'In the Entra admin center, go to "Identity" then select "Users".',
+                    image: 'Screenshot: Users navigation'
+                },
+                {
+                    instruction: 'Invite new guest user',
+                    details: 'Click "New user" then select "Invite external user".',
+                    image: 'Screenshot: Guest user invitation option'
+                },
+                {
+                    instruction: 'Enter guest details',
+                    details: 'Provide email address, display name, and personal message for the invitation.',
+                    image: 'Screenshot: Guest user invitation form'
+                },
+                {
+                    instruction: 'Configure guest permissions',
+                    details: 'Set appropriate permissions and group memberships for the guest user.',
+                    image: 'Screenshot: Guest permissions configuration'
+                },
+                {
+                    instruction: 'Send invitation',
+                    details: 'Review settings and send the invitation to the external user.',
+                    image: 'Screenshot: Guest invitation confirmation'
+                }
+            ]
+        },
+        'configure-guest-access': {
+            title: 'Configure Guest Access Policies',
+            category: 'B2B Guest Management',
+            icon: '🔐',
+            difficulty: 'Intermediate',
+            estimatedTime: '25 minutes',
+            prerequisites: ['manage-guest-users'],
+            steps: [
+                {
+                    instruction: 'Access External Identities settings',
+                    details: 'Navigate to "Identity" > "External Identities" > "External collaboration settings".',
+                    image: 'Screenshot: External collaboration settings'
+                },
+                {
+                    instruction: 'Configure guest invitation settings',
+                    details: 'Set who can invite guests and what information they can access.',
+                    image: 'Screenshot: Guest invitation policies'
+                },
+                {
+                    instruction: 'Set collaboration restrictions',
+                    details: 'Define domain restrictions and allowed/blocked domains for guest access.',
+                    image: 'Screenshot: Domain restrictions configuration'
+                },
+                {
+                    instruction: 'Configure guest user access',
+                    details: 'Set permissions for what guest users can see and do in your directory.',
+                    image: 'Screenshot: Guest user permissions'
+                },
+                {
+                    instruction: 'Review and apply settings',
+                    details: 'Review all guest access policies and save the configuration.',
+                    image: 'Screenshot: Guest policy review'
+                }
+            ]
+        },
+        'configure-conditional-access': {
+            title: 'Create Conditional Access Policy',
+            category: 'Authentication & Security',
+            icon: '🔒',
+            difficulty: 'Advanced',
+            estimatedTime: '30 minutes',
+            prerequisites: ['configure-mfa'],
+            steps: [
+                {
+                    instruction: 'Navigate to Conditional Access',
+                    details: 'Go to "Protection" > "Conditional Access" in the Entra admin center.',
+                    image: 'Screenshot: Conditional Access navigation'
+                },
+                {
+                    instruction: 'Create new policy',
+                    details: 'Click "New policy" to start creating a conditional access policy.',
+                    image: 'Screenshot: New policy creation'
+                },
+                {
+                    instruction: 'Define policy assignments',
+                    details: 'Select users, groups, cloud apps, and conditions for the policy.',
+                    image: 'Screenshot: Policy assignments configuration'
+                },
+                {
+                    instruction: 'Configure access controls',
+                    details: 'Set grant controls like require MFA, compliant device, or approved app.',
+                    image: 'Screenshot: Access controls configuration'
+                },
+                {
+                    instruction: 'Test and enable policy',
+                    details: 'Use report-only mode first, then enable the policy after testing.',
+                    image: 'Screenshot: Policy testing and enablement'
+                }
+            ]
+        },
+        'manage-app-registrations': {
+            title: 'Register Applications in Entra ID',
+            category: 'Directory Settings',
+            icon: '📱',
+            difficulty: 'Intermediate',
+            estimatedTime: '20 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to App registrations',
+                    details: 'In the Entra admin center, go to "Applications" > "App registrations".',
+                    image: 'Screenshot: App registrations navigation'
+                },
+                {
+                    instruction: 'Register new application',
+                    details: 'Click "New registration" to start registering a new application.',
+                    image: 'Screenshot: New app registration'
+                },
+                {
+                    instruction: 'Configure application details',
+                    details: 'Enter name, supported account types, and redirect URIs.',
+                    image: 'Screenshot: App registration configuration'
+                },
+                {
+                    instruction: 'Configure API permissions',
+                    details: 'Add necessary API permissions for the application functionality.',
+                    image: 'Screenshot: API permissions configuration'
+                },
+                {
+                    instruction: 'Generate client secret',
+                    details: 'Create client secret for secure authentication.',
+                    image: 'Screenshot: Client secret generation'
+                }
+            ]
+        },
+        'configure-sso': {
+            title: 'Configure Single Sign-On (SSO)',
+            category: 'Authentication & Security',
+            icon: '🔑',
+            difficulty: 'Advanced',
+            estimatedTime: '35 minutes',
+            prerequisites: ['manage-app-registrations'],
+            steps: [
+                {
+                    instruction: 'Navigate to Enterprise applications',
+                    details: 'Go to "Applications" > "Enterprise applications" in the admin center.',
+                    image: 'Screenshot: Enterprise applications'
+                },
+                {
+                    instruction: 'Add application from gallery',
+                    details: 'Browse or search the application gallery for your target application.',
+                    image: 'Screenshot: Application gallery'
+                },
+                {
+                    instruction: 'Configure SSO method',
+                    details: 'Select SAML, OAuth, or other appropriate SSO method.',
+                    image: 'Screenshot: SSO method selection'
+                },
+                {
+                    instruction: 'Configure SSO settings',
+                    details: 'Set up URLs, certificates, and attribute mappings.',
+                    image: 'Screenshot: SSO configuration'
+                },
+                {
+                    instruction: 'Assign users and test',
+                    details: 'Assign users/groups and test SSO functionality.',
+                    image: 'Screenshot: User assignment and testing'
+                }
+            ]
+        },
+        'configure-pim': {
+            title: 'Configure Privileged Identity Management',
+            category: 'Authentication & Security',
+            icon: '👑',
+            difficulty: 'Advanced',
+            estimatedTime: '40 minutes',
+            prerequisites: ['configure-conditional-access'],
+            steps: [
+                {
+                    instruction: 'Navigate to Privileged Identity Management',
+                    details: 'Go to "Governance" > "Privileged Identity Management" in the admin center.',
+                    image: 'Screenshot: PIM navigation'
+                },
+                {
+                    instruction: 'Activate PIM for directory roles',
+                    details: 'Enable PIM for Azure AD roles in your organization.',
+                    image: 'Screenshot: PIM activation'
+                },
+                {
+                    instruction: 'Configure role settings',
+                    details: 'Set activation duration, approval requirements, and notification settings.',
+                    image: 'Screenshot: Role settings configuration'
+                },
+                {
+                    instruction: 'Make role assignments',
+                    details: 'Assign eligible and active roles to appropriate users.',
+                    image: 'Screenshot: Role assignments'
+                },
+                {
+                    instruction: 'Configure approval workflow',
+                    details: 'Set up approval processes for privileged role activation.',
+                    image: 'Screenshot: Approval workflow configuration'
+                }
+            ]
+        },
+        'monitor-sign-ins': {
+            title: 'Monitor User Sign-in Activity',
+            category: 'Monitoring & Reports',
+            icon: '📈',
+            difficulty: 'Beginner',
+            estimatedTime: '15 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to Sign-in logs',
+                    details: 'Go to "Monitoring" > "Sign-in logs" in the Entra admin center.',
+                    image: 'Screenshot: Sign-in logs navigation'
+                },
+                {
+                    instruction: 'Review recent sign-ins',
+                    details: 'Examine recent user sign-in attempts and their status.',
+                    image: 'Screenshot: Recent sign-ins overview'
+                },
+                {
+                    instruction: 'Filter and search logs',
+                    details: 'Use filters to find specific users, applications, or time periods.',
+                    image: 'Screenshot: Log filtering options'
+                },
+                {
+                    instruction: 'Investigate failed sign-ins',
+                    details: 'Identify and investigate failed authentication attempts.',
+                    image: 'Screenshot: Failed sign-in analysis'
+                },
+                {
+                    instruction: 'Export logs for analysis',
+                    details: 'Export sign-in data for further analysis or compliance reporting.',
+                    image: 'Screenshot: Log export options'
+                }
+            ]
+        },
+        'configure-audit-logs': {
+            title: 'Configure and Review Audit Logs',
+            category: 'Monitoring & Reports',
+            icon: '📋',
+            difficulty: 'Intermediate',
+            estimatedTime: '25 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Access Audit logs',
+                    details: 'Navigate to "Monitoring" > "Audit logs" in the admin center.',
+                    image: 'Screenshot: Audit logs access'
+                },
+                {
+                    instruction: 'Review audit activities',
+                    details: 'Examine recent administrative activities and changes.',
+                    image: 'Screenshot: Audit activities overview'
+                },
+                {
+                    instruction: 'Filter audit events',
+                    details: 'Use filters to focus on specific activities, users, or services.',
+                    image: 'Screenshot: Audit log filtering'
+                },
+                {
+                    instruction: 'Configure log retention',
+                    details: 'Set up log retention policies and integration with external systems.',
+                    image: 'Screenshot: Log retention configuration'
+                },
+                {
+                    instruction: 'Create custom reports',
+                    details: 'Generate custom audit reports for compliance and security review.',
+                    image: 'Screenshot: Custom audit reports'
+                }
+            ]
+        },
+        'manage-device-compliance': {
+            title: 'Configure Device Compliance Policies',
+            category: 'Device Management',
+            icon: '📱',
+            difficulty: 'Intermediate',
+            estimatedTime: '30 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to Device compliance',
+                    details: 'Go to "Devices" > "Compliance policies" in the admin center.',
+                    image: 'Screenshot: Device compliance navigation'
+                },
+                {
+                    instruction: 'Create compliance policy',
+                    details: 'Click "Create Policy" and select the target platform.',
+                    image: 'Screenshot: New compliance policy'
+                },
+                {
+                    instruction: 'Configure compliance settings',
+                    details: 'Set requirements for device health, encryption, and security.',
+                    image: 'Screenshot: Compliance settings configuration'
+                },
+                {
+                    instruction: 'Assign policy to groups',
+                    details: 'Assign the compliance policy to appropriate user or device groups.',
+                    image: 'Screenshot: Policy assignment'
+                },
+                {
+                    instruction: 'Monitor compliance status',
+                    details: 'Review device compliance reports and take action on non-compliant devices.',
+                    image: 'Screenshot: Compliance monitoring'
+                }
+            ]
+        },
+        'configure-device-registration': {
+            title: 'Configure Device Registration',
+            category: 'Device Management',
+            icon: '🔗',
+            difficulty: 'Intermediate',
+            estimatedTime: '25 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Access Device settings',
+                    details: 'Navigate to "Devices" > "Device settings" in the admin center.',
+                    image: 'Screenshot: Device settings navigation'
+                },
+                {
+                    instruction: 'Configure join settings',
+                    details: 'Set up Azure AD join and Azure AD registration policies.',
+                    image: 'Screenshot: Device join configuration'
+                },
+                {
+                    instruction: 'Set user permissions',
+                    details: 'Define which users can join devices to Azure AD.',
+                    image: 'Screenshot: User device permissions'
+                },
+                {
+                    instruction: 'Configure device limits',
+                    details: 'Set maximum number of devices per user and registration settings.',
+                    image: 'Screenshot: Device limits configuration'
+                },
+                {
+                    instruction: 'Monitor device registrations',
+                    details: 'Review registered devices and manage device lifecycle.',
+                    image: 'Screenshot: Device registration monitoring'
+                }
+            ]
+        },
+        'manage-custom-attributes': {
+            title: 'Configure Custom User Attributes',
+            category: 'Directory Settings',
+            icon: '⚙️',
+            difficulty: 'Advanced',
+            estimatedTime: '35 minutes',
+            prerequisites: [],
+            steps: [
+                {
+                    instruction: 'Navigate to Custom attributes',
+                    details: 'Go to "Identity" > "User settings" > "Custom attributes".',
+                    image: 'Screenshot: Custom attributes navigation'
+                },
+                {
+                    instruction: 'Create custom attribute',
+                    details: 'Define new custom attributes for user objects.',
+                    image: 'Screenshot: Custom attribute creation'
+                },
+                {
+                    instruction: 'Configure attribute properties',
+                    details: 'Set data type, validation rules, and visibility settings.',
+                    image: 'Screenshot: Attribute properties configuration'
+                },
+                {
+                    instruction: 'Map attributes to applications',
+                    details: 'Configure attribute mappings for SSO applications.',
+                    image: 'Screenshot: Attribute mapping'
+                },
+                {
+                    instruction: 'Test attribute functionality',
+                    details: 'Validate custom attributes work correctly with applications.',
+                    image: 'Screenshot: Attribute testing'
+                }
+            ]
+        },
+        'configure-identity-governance': {
+            title: 'Setup Identity Governance',
+            category: 'Monitoring & Reports',
+            icon: '🎯',
+            difficulty: 'Advanced',
+            estimatedTime: '45 minutes',
+            prerequisites: ['configure-pim'],
+            steps: [
+                {
+                    instruction: 'Navigate to Identity Governance',
+                    details: 'Go to "Governance" > "Identity Governance" in the admin center.',
+                    image: 'Screenshot: Identity Governance navigation'
+                },
+                {
+                    instruction: 'Configure access reviews',
+                    details: 'Set up periodic access reviews for groups, applications, and roles.',
+                    image: 'Screenshot: Access reviews configuration'
+                },
+                {
+                    instruction: 'Setup entitlement management',
+                    details: 'Create access packages and approval workflows.',
+                    image: 'Screenshot: Entitlement management setup'
+                },
+                {
+                    instruction: 'Configure terms of use',
+                    details: 'Create and assign terms of use policies for users.',
+                    image: 'Screenshot: Terms of use configuration'
+                },
+                {
+                    instruction: 'Monitor governance activities',
+                    details: 'Review governance reports and compliance status.',
+                    image: 'Screenshot: Governance monitoring'
                 }
             ]
         }
@@ -287,8 +792,17 @@ function renderTrainingGrid() {
     const categoryCards = Object.entries(categorizedTasks).map(([categoryName, categoryData]) => {
         const taskButtons = categoryData.tasks.map(task => `
             <button class="task-button" onclick="startTask('${task.id}')">
-                <span class="task-icon">${task.icon}</span>
-                ${task.title}
+                <div class="task-header">
+                    <span class="task-icon">${task.icon}</span>
+                    <span class="task-title">${task.title}</span>
+                </div>
+                <div class="task-meta">
+                    <span class="difficulty difficulty-${task.difficulty?.toLowerCase() || 'beginner'}">${task.difficulty || 'Beginner'}</span>
+                    <span class="time-estimate">⏱️ ${task.estimatedTime || '10 min'}</span>
+                </div>
+                ${task.prerequisites && task.prerequisites.length > 0 ? 
+                    `<div class="task-prerequisites">📚 Requires: ${task.prerequisites.length} module(s)</div>` 
+                    : ''}
             </button>
         `).join('');
         
@@ -802,9 +1316,7 @@ function handleError(error, context = '') {
 }
 
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', init);
-window.addEventListener('load', init);
-
+// (Initialization is handled by the enhanced DOMContentLoaded below)
 // Global error handlers
 window.addEventListener('error', (event) => {
     handleError(event.error, 'Global error handler');
@@ -829,12 +1341,255 @@ window.refreshModules = refreshModules;
 
 // Export the main training app
 window.TrainingApp = {
-    init,
+    init
+};
+
+// Toggle dark mode
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    
+    // Update dark mode button icon
+    const darkModeBtn = document.querySelector('[onclick="toggleDarkMode()"]');
+    if (darkModeBtn) {
+        darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+        darkModeBtn.title = isDark ? 'Toggle light mode' : 'Toggle dark mode';
+    }
+    
+    // Save preference
+    localStorage.setItem('darkMode', isDark);
+    
+    showNotification('Theme Updated', 
+        `Switched to ${isDark ? 'dark' : 'light'} mode`, 
+        'info'
+    );
+}
+
+// Toggle search functionality
+function toggleSearch() {
+    const searchContainer = document.getElementById('search-container');
+    const searchInput = document.getElementById('module-search');
+    
+    if (searchContainer.classList.contains('hidden')) {
+        searchContainer.classList.remove('hidden');
+        searchInput.focus();
+        populateSearchFilters();
+    } else {
+        searchContainer.classList.add('hidden');
+        clearSearch();
+    }
+}
+
+// Populate search filter options
+function populateSearchFilters() {
+    const categoryFilter = document.getElementById('category-filter');
+    categoryFilter.innerHTML = '<option value="">All Categories</option>';
+    
+    Object.keys(categorizedTasks).forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.toLowerCase();
+        option.textContent = category;
+        categoryFilter.appendChild(option);
+    });
+}
+
+// Search functionality
+function searchModules() {
+    const searchInput = document.getElementById('module-search');
+    const difficultyFilter = document.getElementById('difficulty-filter');
+    const categoryFilter = document.getElementById('category-filter');
+    
+    const searchTerm = searchInput.value.toLowerCase();
+    const difficultyFilter_value = difficultyFilter.value;
+    const categoryFilter_value = categoryFilter.value;
+    
+    // Filter tasks
+    const filteredTasks = {};
+    Object.entries(tasks).forEach(([id, task]) => {
+        const matchesSearch = !searchTerm || 
+            task.title.toLowerCase().includes(searchTerm) ||
+            task.category.toLowerCase().includes(searchTerm) ||
+            task.steps.some(step => 
+                step.instruction.toLowerCase().includes(searchTerm) ||
+                step.details.toLowerCase().includes(searchTerm)
+            );
+        
+        const matchesDifficulty = !difficultyFilter_value || 
+            (task.difficulty && task.difficulty.toLowerCase() === difficultyFilter_value);
+            
+        const matchesCategory = !categoryFilter_value ||
+            task.category.toLowerCase() === categoryFilter_value;
+        
+        if (matchesSearch && matchesDifficulty && matchesCategory) {
+            filteredTasks[id] = task;
+        }
+    });
+    
+    // Update display
+    displayFilteredTasks(filteredTasks);
+}
+
+// Display filtered tasks
+function displayFilteredTasks(filteredTasks) {
+    const gridContainer = document.querySelector('.training-grid');
+    if (!gridContainer) return;
+    
+    if (Object.keys(filteredTasks).length === 0) {
+        gridContainer.innerHTML = `
+            <div style="text-align: center; padding: 3rem; color: #6b7280; grid-column: 1 / -1;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
+                <h3>No modules found</h3>
+                <p>Try adjusting your search terms or filters.</p>
+                <button class="btn btn-primary" onclick="clearSearch()" style="margin-top: 1rem;">
+                    Clear Search
+                </button>
+            </div>
+        `;
+        return;
+    }
+    
+    // Categorize filtered tasks
+    const filteredCategorizedTasks = {};
+    Object.entries(filteredTasks).forEach(([id, task]) => {
+        if (!filteredCategorizedTasks[task.category]) {
+            filteredCategorizedTasks[task.category] = {
+                tasks: [],
+                icon: getCategoryIcon(task.category)
+            };
+        }
+        filteredCategorizedTasks[task.category].tasks.push({ ...task, id });
+    });
+    
+    // Render filtered results
+    const categoryCards = Object.entries(filteredCategorizedTasks).map(([categoryName, categoryData]) => {
+        const taskButtons = categoryData.tasks.map(task => `
+            <button class="task-button" onclick="startTask('${task.id}')">
+                <div class="task-header">
+                    <span class="task-icon">${task.icon}</span>
+                    <span class="task-title">${task.title}</span>
+                </div>
+                <div class="task-meta">
+                    <span class="difficulty difficulty-${task.difficulty?.toLowerCase() || 'beginner'}">${task.difficulty || 'Beginner'}</span>
+                    <span class="time-estimate">⏱️ ${task.estimatedTime || '10 min'}</span>
+                </div>
+                ${task.prerequisites && task.prerequisites.length > 0 ? 
+                    `<div class="task-prerequisites">📚 Requires: ${task.prerequisites.length} module(s)</div>` 
+                    : ''}
+            </button>
+        `).join('');
+        
+        return `
+            <div class="category-card">
+                <div class="card-header">
+                    <div class="card-icon">${categoryData.icon}</div>
+                    <h3>${categoryName}</h3>
+                    <p>${getCategoryDescription(categoryName)}</p>
+                </div>
+                <div class="card-tasks">
+                    ${taskButtons}
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    gridContainer.innerHTML = categoryCards;
+}
+
+// Clear search and show all modules
+function clearSearch() {
+    const searchInput = document.getElementById('module-search');
+    const difficultyFilter = document.getElementById('difficulty-filter');
+    const categoryFilter = document.getElementById('category-filter');
+    
+    searchInput.value = '';
+    difficultyFilter.value = '';
+    categoryFilter.value = '';
+    
+    renderTrainingGrid();
+}
+
+// Get category icon
+function getCategoryIcon(category) {
+    const categoryIcons = {
+        'User Account Management': '👥',
+        'Password Management': '🔑',
+        'License Management': '📋',
+        'Group Management': '👪',
+        'Authentication & Security': '🔐',
+        'B2B Guest Management': '🌐',
+        'Directory Settings': '⚙️',
+        'Monitoring & Reports': '📊',
+        'Device Management': '📱'
+    };
+    return categoryIcons[category] || '📖';
+}
+
+// Show help modal
+function showHelp() {
+    const modal = document.getElementById('help-modal');
+    if (modal) {
+        modal.classList.remove('hidden');
+    }
+}
+
+// Initialize dark mode from localStorage
+function initializeDarkMode() {
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+    if (isDarkMode) {
+        document.body.classList.add('dark-mode');
+        const darkModeBtn = document.querySelector('[onclick="toggleDarkMode()"]');
+        if (darkModeBtn) {
+            darkModeBtn.textContent = '☀️';
+            darkModeBtn.title = 'Toggle light mode';
+        }
+    }
+}
+
+// Setup search event listeners
+function setupSearchListeners() {
+    const searchInput = document.getElementById('module-search');
+    const difficultyFilter = document.getElementById('difficulty-filter');
+    const categoryFilter = document.getElementById('category-filter');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', searchModules);
+    }
+    
+    if (difficultyFilter) {
+        difficultyFilter.addEventListener('change', searchModules);
+    }
+    
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', searchModules);
+    }
+}
+
+// Initialize the application when DOM is ready with enhancements
+document.addEventListener('DOMContentLoaded', async function() {
+    console.log('Initializing enhanced training app...');
+    
+    // Initialize the original app
+    await init();
+    
+    // Initialize new features
+    initializeDarkMode();
+    setupSearchListeners();
+    
+    console.log('Enhanced training app initialized successfully');
+});
+
+// Export functions for global access
+window.trainingApp = {
     startTask,
     nextStep,
     previousStep,
     completeTask,
     backToDashboard,
+    toggleDarkMode,
+    toggleSearch,
+    searchModules,
+    clearSearch,
+    showHelp,
     showLicenseInfo,
     showContributeInfo,
     showAbout,
@@ -845,3 +1600,9 @@ window.TrainingApp = {
     refreshModules,
     loadTrainingModules
 };
+
+// Make functions global for onclick handlers
+window.toggleDarkMode = toggleDarkMode;
+window.toggleSearch = toggleSearch;
+window.showHelp = showHelp;
+window.clearSearch = clearSearch;
