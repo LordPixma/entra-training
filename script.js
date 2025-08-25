@@ -1317,8 +1317,6 @@ function handleError(error, context = '') {
 
 // Initialize when DOM is loaded
 // (Initialization is handled by the enhanced DOMContentLoaded below)
-// window.addEventListener('load', init);
-
 // Global error handlers
 window.addEventListener('error', (event) => {
     handleError(event.error, 'Global error handler');
